@@ -6,12 +6,26 @@ class EnemyEntity(Entity):
         super().__init__(*args, **kwargs)
         self.speed = speed
 
-    def move(self):
-        print((self.window.get_width() // 2))
-        print(self.y_pos)
-        if self.x_pos != (self.window.get_width() // 2):
-            direction = -1 if self.x_pos > (self.window.get_width() // 2) else 1
-            self.x_pos += direction * self.speed
-        if self.y_pos != (self.window.get_height() // 2):
-            direction = -1 if self.y_pos > (self.window.get_height() // 2) else 1
-            self.y_pos += direction * self.speed
+    def move(self, enemy_list: list):
+        center_x = self.window.get_width() // 2
+        center_y = self.window.get_height() // 2
+
+        if self.x_pos != center_x:
+            x_direction = -1 if self.x_pos > center_x else 1
+            new_x_pos = self.x_pos + x_direction * self.speed
+            if not self.check_collision_with_entities(
+                enemy_list, new_x_pos, self.y_pos
+            ):
+                self.x_pos = self.x_pos + x_direction * self.speed
+            # else:
+            #     self.x_pos = self.x_pos - x_direction * self.speed
+
+        if self.y_pos != center_y:
+            y_direction = -1 if self.y_pos > center_y else 1
+            new_y_pos = self.y_pos + y_direction * self.speed
+            if not self.check_collision_with_entities(
+                enemy_list, self.x_pos, new_y_pos
+            ):
+                self.y_pos = self.y_pos + y_direction * self.speed
+            # else:
+            #     self.y_pos = self.y_pos - y_direction * self.speed

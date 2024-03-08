@@ -30,4 +30,13 @@ class Entity:
             sprite_y = (window_height - sprite_height) // 2
             self.window.blit(self.sprite, (sprite_x, sprite_y))
 
-    def collision(): ...
+    def check_collision_with_entities(self, list, x_pos, y_pos):
+        self_rect = pygame.Rect(x_pos, y_pos, self.width // 2, self.height // 2)
+        for enemy in list:
+            if enemy != self:
+                enemy_rect = pygame.Rect(
+                    enemy.x_pos, enemy.y_pos, enemy.width // 2, enemy.height // 2
+                )
+                if self_rect.colliderect(enemy_rect):
+                    return True
+        return False

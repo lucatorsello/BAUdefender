@@ -36,7 +36,7 @@ def game_loop(window: Surface, clock: Clock, FPS: int):
             sprite=f"{current_dir}/graphics/grass2.png", window=window
         )
         if len(enemies) == 0:
-            for n in range(100):
+            for n in range(50):
                 if random.choice([True, False]):
                     if random.choice([True, False]):
                         random_x = random.randint(-padding, 0)
@@ -74,7 +74,7 @@ def game_loop(window: Surface, clock: Clock, FPS: int):
         clock.tick(FPS)
         for enemy in enemies:
             enemy.render()
-            enemy.move()
+            enemy.move(enemy_list=enemies)
             print(f"enemy {enemy} rendered")
         player.render()
         pygame.display.update()
