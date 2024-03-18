@@ -39,7 +39,7 @@ def game_loop(window: Surface, clock: Clock, FPS: int):
             sprite=f"{current_dir}/graphics/grass2.png", window=window
         )
         if len(enemies) == 0:
-            for n in range(300):
+            for n in range(50):
                 if random.choice([True, False]):
                     if random.choice([True, False]):
                         random_x = random.randint(-padding, 0)
