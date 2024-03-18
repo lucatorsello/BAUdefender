@@ -40,3 +40,10 @@ class Entity:
                 if self_rect.colliderect(enemy_rect):
                     return True
         return False
+
+    def force_move(self, x_movement, y_movement, enemy_list):
+        new_x_pos = self.x_pos - x_movement
+        new_y_pos = self.y_pos - y_movement
+        if not self.check_collision_with_entities(enemy_list, new_x_pos, new_y_pos):
+            self.x_pos += -x_movement
+            self.y_pos += -y_movement
